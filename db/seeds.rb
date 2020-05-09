@@ -7,6 +7,13 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # ユーザー
+
+User.create!(name:  "サンプルユーザー",
+             email: "user@sample.org",
+             password:              "password",
+             password_confirmation: "password",
+             )
+
 User.create!(name:  "Example User",
              email: "example@railstutorial.org",
              password:              "foobar",
@@ -25,8 +32,8 @@ end
 
 # マイクロポスト
 users = User.order(:created_at).take(6)
-50.times do
-  content = Faker::Lorem.sentence(word_count: 5)
+50.times do |n|
+  content = "#{n+1}番目のダミーテキストの投稿です。"
   users.each { |user| user.microposts.create!(content: content) }
 end
 

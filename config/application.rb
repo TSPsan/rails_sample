@@ -18,5 +18,8 @@ module RailsSample
 
     # 認証トークンをremoteフォームに埋め込む
     config.action_view.embed_authenticity_token_in_remote_forms = true
+
+    # デフォルトのタイムゾーンを日本時間にする。
+    config.time_zone = 'Asia/Tokyo'
   end
 end
