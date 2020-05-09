@@ -13,12 +13,22 @@
 
       <%= f.label :remember_me, class: "checkbox inline" do %>
         <%= f.check_box :remember_me %>
-        <span>Remember me on this computer</span>
+        <span>cookieの利用によるアカウントのログイン維持</span>
       <% end %>
 
       <%= f.submit "Log in", class: "btn btn-primary" %>
     <% end %>
 
-    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+    <p>未登録ですか？ <%= link_to "ユーザー登録", signup_path %></p>
   </div>
 </div>
+
+<p>
+～サンプルユーザー～<br>
+<br>
+＜メールアドレス＞<br>
+user@sample.org<br>
+<br>
+＜パスワード＞<br>
+password
+</p>
