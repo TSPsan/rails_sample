@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in @user
-      flash[:success] = 'Welcome to the RailsSample!'
+      flash[:success] = 'ようこそ RailsSample へ!'
       redirect_to @user
 		else
 			render 'new'
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 
 	def update
     if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated"
+      flash[:success] = "ユーザー情報を更新しました。"
       redirect_to @user
     else
       render 'edit'
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
 
 	def destroy
     User.find(params[:id]).destroy
-    flash[:success] = "User deleted"
+    flash[:success] = "ユーザーを削除しました"
 		redirect_to users_url
 	end
 
