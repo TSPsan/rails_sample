@@ -6,7 +6,8 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   # end
 
   def setup
-    @user = users(:michael)
+    @user  = users(:michael)
+    @guest =users(:guest)
   end
 
 	test "login with invalid information" do
@@ -55,5 +56,15 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     # クッキーを削除してログイン
     log_in_as(@user, remember_me: '0')
     assert_empty cookies['remember_token']
+  end
+
+  # ゲストユーザーとしてログイン
+  test "login as guest" do
+    # ゲストユーザーとしてSessionsコントローラアクションでログイン
+    post guest_login_path
+    # ゲストユーザーとしてログインしたらHomeに行く
+    assert_redirected_to root_url
+    assert is_logged_in?
+    assert_not flash.empty?
   end
 end
