@@ -20,6 +20,13 @@ class MicropostsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to login_url
   end
 
+  test "should redirect create_mysterious when not logged in" do
+    assert_no_difference 'Micropost.count' do
+      get create_mysterious_path
+		end
+    assert_redirected_to login_url
+  end
+
   test "should redirect destroy for wrong micropost" do
     log_in_as(users(:michael))
     micropost = microposts(:ants)
