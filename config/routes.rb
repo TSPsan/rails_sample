@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
   controller :microposts do
 		resources :microposts,    only: [:create, :destroy]
+    get '/create_mysterious',    to: 'microposts#create_mysterious'
 	end
 
   controller :relationships do

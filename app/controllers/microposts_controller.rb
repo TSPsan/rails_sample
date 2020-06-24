@@ -1,5 +1,5 @@
 class MicropostsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy]
+  before_action :logged_in_user, only: [:create, :destroy, :create_mysterious]
   before_action :correct_user, only: :destroy
 
   def create
@@ -18,6 +18,18 @@ class MicropostsController < ApplicationController
     flash[:success] = "投稿を削除しました。"
     redirect_back(fallback_location: root_url)
   end
+
+  # 怪文書を投稿する
+	def create_mysterious
+    @micropost = current_user.microposts.build(content: Micropost.generate_mysterious_document)
+    if @micropost.save
+      flash[:success] = "怪文書を投稿しました。"
+      redirect_to root_url
+    else
+      @feed_items = []
+      render 'static_pages/home'
+    end
+	end
 
   private
 

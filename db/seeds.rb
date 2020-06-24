@@ -32,9 +32,11 @@ end
 
 # マイクロポスト
 users = User.order(:created_at).take(6)
-50.times do |n|
-  content = "#{n+1}番目のダミーテキストの投稿です。"
-  users.each { |user| user.microposts.create!(content: content) }
+50.times do
+  users.each do |user|
+		mysterious_document = Micropost.generate_mysterious_document
+		user.microposts.create!(content: mysterious_document)
+	end
 end
 
 # リレーションシップ

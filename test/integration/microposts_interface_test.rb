@@ -49,4 +49,11 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
     get root_path
     assert_match "1 ", response.body
   end
+
+  test "mysterious_micropost create" do
+    log_in_as(@user)
+    assert_difference 'Micropost.count', 1 do
+			get create_mysterious_path
+		end
+	end
 end
