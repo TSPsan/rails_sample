@@ -61,7 +61,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   # ゲストユーザーとしてログイン
   test "login as guest" do
     # ゲストユーザーとしてSessionsコントローラアクションでログイン
-    post guest_login_path
+    get guest_login_path
     # ゲストユーザーとしてログインしたらHomeに行く
     assert_redirected_to root_url
     assert is_logged_in?
