@@ -72,4 +72,9 @@ class User < ApplicationRecord
   def following?(other_user)
     following.include?(other_user)
   end
+
+  # ゲストユーザーを渡す
+  def self.guest
+    User.find_by(email: 'guest@sample.org')
+  end
 end

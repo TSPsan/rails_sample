@@ -3,8 +3,9 @@ require 'test_helper'
 class UsersControllerTest < ActionDispatch::IntegrationTest
 
   def setup
-    @user = users(:michael)
+    @user       = users(:michael)
     @other_user = users(:archer)
+    @guest      = users(:guest)
   end
 
 	test "should redirect index when not logged in" do
@@ -79,4 +80,21 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     get followers_user_path(@user)
     assert_redirected_to login_url
   end
+
+  # ゲストユーザーはユーザー情報の編集画面に行けない
+  test "should redirect edit when logged in as guest"do
+    log_in_as(@guest)
+    get edit_user_path(@guest)
+    assert_not flash.empty?
+    assert_redirected_to root_url
+	end
+
+  # ゲストユーザーはユーザー情報の変更はできない
+  test "should redirect update when logged in as guest" do
+    log_in_as(@guest)
+    patch user_path(@guest), params: { user: { name: "changed_name",
+                                              email: "changed_email" } }
+    assert_not flash.empty?
+    assert_redirected_to root_url
+	end
 end

@@ -8,8 +8,8 @@
 
 # ユーザー
 
-User.create!(name:  "サンプルユーザー",
-             email: "user@sample.org",
+User.create!(name:  "ゲストユーザー",
+             email: "guest@sample.org",
              password:              "password",
              password_confirmation: "password",
              )

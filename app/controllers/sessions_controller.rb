@@ -19,4 +19,10 @@ class SessionsController < ApplicationController
     redirect_to root_url
 	end
 
+  def guest_login
+    @user = User.guest
+    log_in @user
+    flash[:success] = "ゲストユーザーとしてログインしました。"
+    redirect_to root_url
+  end
 end
