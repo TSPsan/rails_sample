@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :following, :followers]
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
-  before_action :check_guest,    only: [:edit, :update]
+  before_action :refuse_guest,   only: [:edit, :update]
 
 	def index
     @users = User.paginate(page: params[:page])
@@ -80,7 +80,7 @@ class UsersController < ApplicationController
     end
 
     # ゲストユーザーの機能制限
-    def check_guest
+    def refuse_guest
       if current_user.email == 'guest@sample.org'
         flash[:danger] = "ゲストユーザー情報(メールアドレス、名前、パスワード)の編集は行えません。"
 				redirect_to root_url
