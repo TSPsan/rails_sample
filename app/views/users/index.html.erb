@@ -1,10 +1,19 @@
 <% provide(:title, 'All users') %>
+<% provide(:search_name, 'ユーザー検索') %>
+<% provide(:path, users_path) %>
+
 <h2>すべてのユーザー</h2>
 
-<%= will_paginate %>
+<!-- 検索フォーム -->
+<div class="row">
+  <div class="col-md-4"></div>
+  <%= render 'shared/search_form' %>
+</div>
 
-<ul class="users">
-<%= render @users %>
-</ul>
-
-<%= will_paginate %>
+<h3> ユーザー (<%= @users_list.count %>)</h3>
+<div class="row">
+  <ul class="users">
+  <%= render @users %>
+  </ul>
+  <%= will_paginate %>
+</div>
