@@ -8,20 +8,8 @@
 
 # ユーザー
 
-User.create!(name:  "ゲストユーザー",
-             email: "guest@sample.org",
-             password:              "password",
-             password_confirmation: "password",
-             )
-
-User.create!(name:  "Example User",
-             email: "example@railstutorial.org",
-             password:              "foobar",
-             password_confirmation: "foobar",
-             admin: true)
-
-99.times do |n|
-  name  = Faker::Name.name
+10.times do |n|
+  name  = "【サンプルユーザー】 #{Faker::Name.name}"
   email = "example-#{n+1}@railstutorial.org"
   password = "password"
   User.create!(name:  name,
@@ -29,6 +17,12 @@ User.create!(name:  "Example User",
                password:              password,
                password_confirmation: password)
 end
+
+User.create!(name:  "ゲストユーザー",
+             email: "guest@sample.org",
+             password:              "password",
+             password_confirmation: "password",
+             )
 
 # マイクロポスト
 users = User.order(:created_at).take(6)
@@ -39,11 +33,18 @@ users = User.order(:created_at).take(6)
 	end
 end
 
+users = User.all
+user  = users.last
+
+user.microposts.create!(content: "【制作者より】サンプルユーザーのHomeにようこそ。")
+user.microposts.create!(content: "【制作者より】気軽に怪文書を投稿してください。")
+
+
 # リレーションシップ
 users = User.all
-user  = users.first
-following = users[2..50]
-followers = users[3..40]
+user  = users.last
+following = users[1..3]
+followers = users[3..5]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
 

@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   private
-
     #beforeフィルター
 
     # ユーザーのログインを確認する

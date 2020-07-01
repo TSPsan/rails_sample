@@ -8,6 +8,7 @@ class MicropostsController < ApplicationController
       flash[:success] = "投稿しました。"
       redirect_to root_url
     else
+      @feed_list = []
       @feed_items = []
       render 'static_pages/home'
     end
@@ -20,16 +21,17 @@ class MicropostsController < ApplicationController
   end
 
   # 怪文書を投稿する
-	def create_mysterious
+  def create_mysterious
     @micropost = current_user.microposts.build(content: Micropost.generate_mysterious_document)
     if @micropost.save
       flash[:success] = "怪文書を投稿しました。"
       redirect_to root_url
     else
+      @feed_list = []
       @feed_items = []
       render 'static_pages/home'
     end
-	end
+  end
 
   private
 

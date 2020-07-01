@@ -76,4 +76,13 @@ class User < ApplicationRecord
   def self.guest
     User.find_by(email: 'guest@sample.org')
   end
+
+  # ユーザー名のキーワードを検索するクエリ生成
+  def self.search(search)
+    if search
+      where('name LIKE ?', "%#{search}%")
+    else
+      all
+    end
+  end
 end
